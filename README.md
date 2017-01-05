@@ -1,5 +1,5 @@
 # BasicPhrases (Android)
-![alt tag](https://github.com/shrobon/BrainTrainer/blob/master/BrainTrainer.PNG)
+![alt tag](https://github.com/shrobon/BrainTrainer/blob/master/BrainTrainer1.PNG)
 
 
 A simple brain trainer game for android. 

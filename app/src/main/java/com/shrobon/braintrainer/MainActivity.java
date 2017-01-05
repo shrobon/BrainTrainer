@@ -1,5 +1,6 @@
 package com.shrobon.braintrainer;
 
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 playAgainButton.setVisibility(View.VISIBLE);
                 timerTextView.setText("0s");
                 resultTextView.setText("Final Score:"+ pointsTextView.getText());
+                
+                MediaPlayer mplayer = MediaPlayer.create(getApplicationContext(),R.raw.horn);//this here will refer to countdown timer and not application context
+                mplayer.start();
                 Toast.makeText(getApplicationContext(),"Game over: Timeout!!",Toast.LENGTH_LONG).show();
             }
         }.start();
@@ -83,34 +87,84 @@ public class MainActivity extends AppCompatActivity {
 
     public void generateQuestion()
     {
-
+        //we would also require some logic to perform different computation
         Random rand = new Random();
-        int a = rand.nextInt(21);// Generates a random number between 0 and 20
-        int b = rand.nextInt(21);
 
-        sumTextView.setText(Integer.toString(a)+"+"+Integer.toString(b));
+        int a = rand.nextInt(21);// Number 1:: Generates a random number between 0 and 20
+        int b = rand.nextInt(21);// Number 2
+        int logicRandom = rand.nextInt(3); //chooses whether it will be + , - , *
+
         locationOfCorrectAnswer = rand.nextInt(4); // will give random between 0-3
 
         //**can cause a problem if not cleared :: Good ! :D
         answers.clear(); //clear the arraylist each time we answer the question
         int incorrectAnswer;
 
-        for(int i = 0 ; i <4 ; i++)
+
+
+        if(logicRandom == 0) //case of addition
         {
-            if( i == locationOfCorrectAnswer)
+            sumTextView.setText(Integer.toString(a)+"+"+Integer.toString(b));
+            for(int i = 0 ; i <4 ; i++)
             {
-                answers.add(a + b);
-            }
-            else
-            {
-                incorrectAnswer= (rand.nextInt(41));
-                while(incorrectAnswer == a + b)
+                if( i == locationOfCorrectAnswer)
+                {
+                    answers.add(a + b);
+                }
+                else
                 {
                     incorrectAnswer= (rand.nextInt(41));
+                    while(incorrectAnswer == a + b)
+                    {
+                        incorrectAnswer= (rand.nextInt(41));
+                    }
+                    answers.add(incorrectAnswer);
                 }
-                answers.add(incorrectAnswer);
             }
         }
+        else if(logicRandom == 1) // case of minus
+        {
+            sumTextView.setText(Integer.toString(a)+"-"+Integer.toString(b));
+            for(int i = 0 ; i <4 ; i++)
+            {
+                if( i == locationOfCorrectAnswer)
+                {
+                    answers.add(a - b);
+                }
+                else
+                {
+                    incorrectAnswer= (rand.nextInt(41));
+                    while(incorrectAnswer == a - b)
+                    {
+                        incorrectAnswer= (rand.nextInt(41));
+                    }
+                    answers.add(incorrectAnswer);
+                }
+            }
+        }
+
+        else // case of multiply
+        {
+            sumTextView.setText(Integer.toString(a)+"*"+Integer.toString(b));
+            for(int i = 0 ; i <4 ; i++)
+            {
+                if( i == locationOfCorrectAnswer)
+                {
+                    answers.add(a * b);
+                }
+                else
+                {
+                    incorrectAnswer= (rand.nextInt(41));
+                    while(incorrectAnswer == a * b)
+                    {
+                        incorrectAnswer= (rand.nextInt(41));
+                    }
+                    answers.add(incorrectAnswer);
+                }
+            }
+        }
+
+
 
         button0.setText(Integer.toString(answers.get(0)));
         button1.setText(Integer.toString(answers.get(1)));

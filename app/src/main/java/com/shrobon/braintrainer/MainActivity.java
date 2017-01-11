@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
     TextView timerTextView;
     Button playAgainButton;
     RelativeLayout gameRelativelayout;
+    GridLayout gridLayout;
 
     public void playAgain(View v)
     {
+        gridLayout.setVisibility(GridLayout.VISIBLE);
         generateQuestion();
         score = 0;
         numberOfQuestions =0;
@@ -51,10 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                gridLayout.setVisibility(GridLayout.INVISIBLE);
                 playAgainButton.setVisibility(View.VISIBLE);
                 timerTextView.setText("0s");
                 resultTextView.setText("Final Score:"+ pointsTextView.getText());
-                
+
                 MediaPlayer mplayer = MediaPlayer.create(getApplicationContext(),R.raw.horn);//this here will refer to countdown timer and not application context
                 mplayer.start();
                 Toast.makeText(getApplicationContext(),"Game over: Timeout!!",Toast.LENGTH_LONG).show();
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         timerTextView = (TextView)findViewById(R.id.timerTextView);
         playAgainButton=(Button)findViewById(R.id.playAgainButton);
         gameRelativelayout = (RelativeLayout)findViewById(R.id.gameRelativelayout);
+        gridLayout = (GridLayout)findViewById(R.id.gridLayout);
 
         //playAgain(findViewById(R.id.playAgainButton));
 

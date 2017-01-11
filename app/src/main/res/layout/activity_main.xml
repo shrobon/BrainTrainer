@@ -146,13 +146,13 @@
         android:text="Go!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:id="@+id/startButton"
         android:textSize="40sp"
         android:padding="40dp"
         android:backgroundTint="@android:color/holo_green_light"
         android:onClick="start"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
